@@ -3,8 +3,8 @@ import { NextRequest, NextResponse } from "next/server";
 import { z } from "zod";
 
 const schemaUserRegister = z.object({
-  firstName: z.string(),
-  lastName: z.string(),
+  firstName: z.string().min(1),
+  lastName: z.string().min(1),
   email: z.string().email(),
   password: z.string().min(8),
   phone: z.string().min(10),
@@ -31,17 +31,32 @@ export async function POST(request: NextRequest) {
       const path = error.issues[0].path[0];
       const message = error.issues[0].message;
 
-      return NextResponse.json({
-        message: `${path} ${message}`,
-      });
+      return NextResponse.json(
+        {
+          message: `${path} ${message}`,
+        },
+        {
+          status: 400,
+        }
+      );
     } else if (error instanceof Error) {
-      return NextResponse.json({
-        message: error.message,
-      });
+      return NextResponse.json(
+        {
+          message: error.message,
+        },
+        {
+          status: 400,
+        }
+      );
     } else {
-      return NextResponse.json({
-        message: "Internal Server Error",
-      });
+      return NextResponse.json(
+        {
+          message: "Internal Server Error",
+        },
+        {
+          status: 500,
+        }
+      );
     }
   }
 }
