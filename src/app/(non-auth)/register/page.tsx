@@ -1,3 +1,4 @@
+import { poppins } from "@/font";
 import Link from "next/link";
 import { redirect } from "next/navigation";
 import { FcGoogle } from "react-icons/fc";
@@ -48,7 +49,7 @@ export default function Register({ searchParams }: Props) {
   return (
     <form
       action={submitHandler}
-      className="min-h-screen w-full flex items-center justify-center bg-gradient-to-b from-red-600 to-blue-900"
+      className="min-h-screen w-full flex items-center justify-center bg-[#295943]"
     >
       <div className="w-[900px] h-[450px] border border-white rounded-2xl flex  justify-center overflow-hidden ">
         <div className="flex-2 h-full relative">
@@ -59,7 +60,11 @@ export default function Register({ searchParams }: Props) {
           />
         </div>
         <div className="flex-3 bg-white flex gap-7 flex-col justify-center items-center  ">
-          <div className="text-xl font-extrabold">Create Account</div>
+          <div
+            className={`text-xl font-bold ${poppins.className} text-[#295943]`}
+          >
+            Create Account
+          </div>
           {searchParams.error && (
             <div className="bg-red-100 text-red-700 p-2 rounded-md">
               {searchParams.error}
@@ -85,7 +90,7 @@ export default function Register({ searchParams }: Props) {
                 name="firstName"
                 id="firstName"
                 placeholder="First Name"
-                className="w-[190px] h-8 p-2 border border-black rounded-sm"
+                className={`w-[190px] h-8 p-2 border border-black rounded-sm ${poppins.className}`}
               />
               <input
                 type="text"
@@ -120,7 +125,7 @@ export default function Register({ searchParams }: Props) {
 
             <button
               type="submit"
-              className="w-full h-10 bg-green-800 rounded-sm text-white hover:bg-green-700 cursor-pointer"
+              className={`w-full h-10 bg-green-800 rounded-sm text-white hover:bg-green-700 cursor-pointer ${poppins.className}`}
             >
               Create Account
             </button>

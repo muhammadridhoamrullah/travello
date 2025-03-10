@@ -1,34 +1,30 @@
-import { CreateUser } from "@/db/model/user";
+import { LoginUser } from "@/db/model/user";
 import { NextRequest, NextResponse } from "next/server";
 import { z } from "zod";
 
-const schemaUserRegister = z.object({
-  firstName: z.string().min(1),
-  lastName: z.string().min(1),
+const schemaLogin = z.object({
   email: z.string().email(),
   password: z.string().min(8),
-  phone: z.string().min(10),
 });
 
 export async function POST(request: NextRequest) {
   try {
     const data = await request.json();
 
-    const validatedData = schemaUserRegister.safeParse(data);
+    const validatedData = schemaLogin.safeParse(data);
 
     if (!validatedData.success) {
       throw validatedData.error;
     }
 
-    const creatingUser = await CreateUser(data);
+    const access_token = await LoginUser(data);
 
     return NextResponse.json(
       {
-        data: creatingUser,
-        message: "User has been created",
+        access_token,
       },
       {
-        status: 201,
+        status: 200,
       }
     );
   } catch (error) {
@@ -38,7 +34,7 @@ export async function POST(request: NextRequest) {
 
       return NextResponse.json(
         {
-          message: `${path} ${message}`,
+          message: `Path: ${path} & Message: ${message}`,
         },
         {
           status: 400,

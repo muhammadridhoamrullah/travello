@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
-import "./globals.css";
+import "../globals.css";
+import { ImAirplane } from "react-icons/im";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -15,6 +16,9 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "Travello",
   description: "Travello is a travel booking platform.",
+  icons: {
+    icon: "/airplane.png",
+  },
 };
 
 export default function RootLayout({

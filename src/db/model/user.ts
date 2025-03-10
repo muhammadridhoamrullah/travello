@@ -1,6 +1,7 @@
 import { UserModel } from "@/type";
 import { GetDB } from "../config";
-import { hashPassword } from "../helpers/bcrypt";
+import { comparePassword, hashPassword } from "../helpers/bcrypt";
+import { signToken } from "../helpers/jwt";
 
 const COLLECTION_NAME = "users";
 
@@ -32,4 +33,31 @@ export async function CreateUser(user: inputCreateUser) {
   console.log(creatingUser, "ini creatingUser di model user");
 
   return creatingUser;
+}
+
+type inputLoginUser = Pick<UserModel, "email" | "password">;
+
+export async function LoginUser(user: inputLoginUser) {
+  const db = await GetDB();
+
+  const checkUser = (await db.collection(COLLECTION_NAME).findOne({
+    email: user.email,
+  })) as UserModel;
+
+  if (!checkUser) {
+    throw new Error("Invalid email or password");
+  }
+
+  const checkPassword = comparePassword(user.password, checkUser.password);
+
+  if (!checkPassword) {
+    throw new Error("Invalid email or password");
+  }
+
+  const access_token = signToken({
+    _id: checkUser._id,
+    email: checkUser.email,
+  });
+
+  return access_token;
 }
