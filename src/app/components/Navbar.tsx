@@ -26,7 +26,7 @@ export default function Navbar() {
   const cookiesAuth = Cookies.get("access_token");
 
   return (
-    <div className=" px-20 py-2 flex flex-col justify-center gap-2 ">
+    <div className="fixed top-0 left-0 w-full  z-50 px-20 py-2 flex flex-col justify-center gap-2 ">
       <div className="flex justify-between">
         <div className="w-36 h-10 relative ">
           <Link href={"/"}>
