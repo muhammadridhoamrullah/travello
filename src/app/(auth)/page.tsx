@@ -20,7 +20,7 @@ import AtraksiAktivitasFormMenu from "../components/AtraksiAktivitasFormMenu";
 import LainnyaFormMenu from "../components/LainnyaFormMenu";
 
 export default function Home() {
-  const [activeMenu, setActiveMenu] = useState("hotel");
+  const [activeMenu, setActiveMenu] = useState("rentalMobil");
   console.log(activeMenu, "ini active menu");
 
   function renderFormMenu() {
@@ -137,7 +137,7 @@ export default function Home() {
 
         {/* Awal Form Menu Andalan */}
 
-        <div className="mt-4">{renderFormMenu()}</div>
+        <div className="w-full h-fit py-4  mt-4">{renderFormMenu()}</div>
         {/* Akhir Form Menu Andalan */}
       </div>
 
