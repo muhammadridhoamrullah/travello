@@ -137,7 +137,7 @@ export default function Home() {
 
         {/* Awal Form Menu Andalan */}
 
-        <div className="w-full h-fit py-4  mt-4">{renderFormMenu()}</div>
+        <div className="w-full  h-fit mt-2  ">{renderFormMenu()}</div>
         {/* Akhir Form Menu Andalan */}
       </div>
 
