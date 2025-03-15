@@ -10,7 +10,8 @@
     "available_date": "2025-03-16",
     "start_time": "09:00",
     "finish_date": "2025-03-18",
-    "end_time": "09:00"
+    "end_time": "09:00",
+    "is_with_driver": false
   },
   {
     "car_model": "Honda CR-V 2020",
@@ -23,7 +24,8 @@
     "available_date": "2025-03-16",
     "start_time": "09:00",
     "finish_date": "2025-03-18",
-    "end_time": "09:00"
+    "end_time": "09:00",
+    "is_with_driver": true
   },
   {
     "car_model": "Toyota Fortuner 2022",
@@ -36,7 +38,8 @@
     "available_date": "2025-03-16",
     "start_time": "09:00",
     "finish_date": "2025-03-18",
-    "end_time": "09:00"
+    "end_time": "09:00",
+    "is_with_driver": false
   },
   {
     "car_model": "Suzuki Swift 2018",
@@ -49,7 +52,8 @@
     "available_date": "2025-03-16",
     "start_time": "09:00",
     "finish_date": "2025-03-18",
-    "end_time": "09:00"
+    "end_time": "09:00",
+    "is_with_driver": false
   },
   {
     "car_model": "Daihatsu Xenia 2020",
@@ -62,7 +66,8 @@
     "available_date": "2025-03-16",
     "start_time": "10:00",
     "finish_date": "2025-03-20",
-    "end_time": "10:00"
+    "end_time": "10:00",
+    "is_with_driver": false
   },
   {
     "car_model": "Mitsubishi Pajero Sport 2021",
@@ -75,7 +80,8 @@
     "available_date": "2025-03-18",
     "start_time": "09:00",
     "finish_date": "2025-03-22",
-    "end_time": "09:00"
+    "end_time": "09:00",
+    "is_with_driver": false
   },
   {
     "car_model": "Honda HR-V 2022",
@@ -88,7 +94,8 @@
     "available_date": "2025-03-20",
     "start_time": "08:00",
     "finish_date": "2025-03-24",
-    "end_time": "08:00"
+    "end_time": "08:00",
+    "is_with_driver": true
   },
   {
     "car_model": "Nissan Livina 2021",
@@ -101,7 +108,8 @@
     "available_date": "2025-03-25",
     "start_time": "09:00",
     "finish_date": "2025-03-28",
-    "end_time": "09:00"
+    "end_time": "09:00",
+    "is_with_driver": true
   },
   {
     "car_model": "Kia Seltos 2021",
@@ -114,7 +122,8 @@
     "available_date": "2025-03-18",
     "start_time": "10:00",
     "finish_date": "2025-03-21",
-    "end_time": "10:00"
+    "end_time": "10:00",
+    "is_with_driver": false
   },
   {
     "car_model": "Hyundai Tucson 2020",
@@ -127,6 +136,7 @@
     "available_date": "2025-03-17",
     "start_time": "08:00",
     "finish_date": "2025-03-21",
-    "end_time": "08:00"
+    "end_time": "08:00",
+    "is_with_driver": true
   }
 ]

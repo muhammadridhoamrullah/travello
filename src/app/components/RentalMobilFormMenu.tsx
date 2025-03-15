@@ -7,10 +7,11 @@ import { FaPersonCircleCheck } from "react-icons/fa6";
 import { GrMap, GrCalendar, GrClock } from "react-icons/gr";
 import { FaSearch } from "react-icons/fa";
 import { LuClock4 } from "react-icons/lu";
+import Swal from "sweetalert2";
 
 export default function RentalMobilFormMenu() {
   const [formData, setFormData] = useState({
-    tipeSopir: "tanpaSopir",
+    is_with_driver: false,
     location: "",
     available_date: "",
     start_time: "",
@@ -18,10 +19,10 @@ export default function RentalMobilFormMenu() {
     end_time: "",
   });
 
-  const handleTipeSopir = (value: "tanpaSopir" | "denganSopir") => {
+  const handleTipeSopir = (value: boolean) => {
     setFormData({
       ...formData,
-      tipeSopir: value,
+      is_with_driver: value,
     });
   };
 
@@ -52,7 +53,37 @@ export default function RentalMobilFormMenu() {
   const submitHandler = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    console.log(formData);
+    try {
+      const url = `http://localhost:3000/api/rental-mobil/search?is_with_driver=${formData.is_with_driver}&location=${formData.location}&available_date=${formData.available_date}&start_time=${formData.start_time}&finish_date=${formData.finish_date}&end_time=${formData.end_time}`;
+
+      console.log(url, "ini url");
+
+      const response = await fetch(url);
+
+      
+
+      const responseData = await response.json();
+
+      if (!response.ok) {
+        throw new Error(responseData.message);
+      }
+
+      console.log(responseData, "ini response data");
+    } catch (error) {
+      if (error instanceof Error) {
+        Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: error.message,
+        });
+      } else {
+        Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: "Internal Server Error",
+        });
+      }
+    }
   };
 
   return (
@@ -64,10 +95,10 @@ export default function RentalMobilFormMenu() {
       <div className={`flex  gap-2 ${poppins.className}`}>
         <div
           className={`flex justify-center items-center gap-2 px-3 py-2 rounded-full ${
-            formData.tipeSopir === "tanpaSopir" ? "bg-[#0194F3]" : "bg-black/40"
+            formData.is_with_driver === false ? "bg-[#0194F3]" : "bg-black/40"
           }  cursor-pointer`}
           onClick={() => {
-            handleTipeSopir("tanpaSopir");
+            handleTipeSopir(false);
           }}
         >
           <FaCar className="w-5 h-5" />
@@ -75,12 +106,10 @@ export default function RentalMobilFormMenu() {
         </div>
         <div
           className={`flex justify-center items-center gap-2 px-3 py-2 rounded-full ${
-            formData.tipeSopir === "denganSopir"
-              ? "bg-[#0194F3]"
-              : "bg-black/40 "
+            formData.is_with_driver === true ? "bg-[#0194F3]" : "bg-black/40 "
           } cursor-pointer`}
           onClick={() => {
-            handleTipeSopir("denganSopir");
+            handleTipeSopir(true);
           }}
         >
           <FaPersonCircleCheck className="w-5 h-5" />
@@ -172,21 +201,13 @@ export default function RentalMobilFormMenu() {
 
           <button
             type="submit"
-            className="w-fit h-fit p-2 rounded-lg bg-green-800 hover:bg-green-700"
+            className="w-fit h-fit p-2 rounded-lg bg-green-800 hover:bg-green-700 cursor-pointer"
           >
             <FaSearch className="w-6 h-6" />
           </button>
         </div>
       </div>
       {/* Akhir Form Rental Mobil */}
-
-      {/* Awal Tombol Submit */}
-      {/* <div className="w-full flex justify-center items-center ">
-        <button className="w-fit h-fit p-2 rounded-lg bg-green-800">
-          Submit
-        </button>
-      </div> */}
-      {/* Akhir Tombol Submit */}
 
       {/* Awal Trusted By */}
       <div className=" flex justify-center items-center gap-2 w-full  ">
