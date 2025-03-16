@@ -8,9 +8,9 @@
     "location": "Surabaya",
     "is_available": true,
     "available_date": "2025-03-16",
-    "start_time": "09:00",
+    "start_time": "00:01",
     "finish_date": "2025-03-18",
-    "end_time": "09:00",
+    "end_time": "23:59",
     "is_with_driver": false
   },
   {
@@ -22,9 +22,9 @@
     "location": "Surabaya",
     "is_available": true,
     "available_date": "2025-03-16",
-    "start_time": "09:00",
+    "start_time": "00:01",
     "finish_date": "2025-03-18",
-    "end_time": "09:00",
+    "end_time": "23:59",
     "is_with_driver": true
   },
   {
@@ -36,9 +36,9 @@
     "location": "Jakarta",
     "is_available": true,
     "available_date": "2025-03-16",
-    "start_time": "09:00",
+    "start_time": "00:01",
     "finish_date": "2025-03-18",
-    "end_time": "09:00",
+    "end_time": "23:59",
     "is_with_driver": false
   },
   {
@@ -50,9 +50,9 @@
     "location": "Bali",
     "is_available": true,
     "available_date": "2025-03-16",
-    "start_time": "09:00",
+    "start_time": "00:01",
     "finish_date": "2025-03-18",
-    "end_time": "09:00",
+    "end_time": "23:59",
     "is_with_driver": false
   },
   {
@@ -64,9 +64,9 @@
     "location": "Yogyakarta",
     "is_available": true,
     "available_date": "2025-03-16",
-    "start_time": "10:00",
+    "start_time": "00:01",
     "finish_date": "2025-03-20",
-    "end_time": "10:00",
+    "end_time": "23:59",
     "is_with_driver": false
   },
   {
@@ -78,9 +78,9 @@
     "location": "Surabaya",
     "is_available": true,
     "available_date": "2025-03-18",
-    "start_time": "09:00",
+    "start_time": "00:01",
     "finish_date": "2025-03-22",
-    "end_time": "09:00",
+    "end_time": "23:59",
     "is_with_driver": false
   },
   {
@@ -92,9 +92,9 @@
     "location": "Bandung",
     "is_available": true,
     "available_date": "2025-03-20",
-    "start_time": "08:00",
+    "start_time": "00:01",
     "finish_date": "2025-03-24",
-    "end_time": "08:00",
+    "end_time": "23:59",
     "is_with_driver": true
   },
   {
@@ -106,9 +106,9 @@
     "location": "Medan",
     "is_available": true,
     "available_date": "2025-03-25",
-    "start_time": "09:00",
+    "start_time": "00:01",
     "finish_date": "2025-03-28",
-    "end_time": "09:00",
+    "end_time": "23:59",
     "is_with_driver": true
   },
   {
@@ -120,9 +120,9 @@
     "location": "Denpasar",
     "is_available": true,
     "available_date": "2025-03-18",
-    "start_time": "10:00",
+    "start_time": "00:01",
     "finish_date": "2025-03-21",
-    "end_time": "10:00",
+    "end_time": "23:59",
     "is_with_driver": false
   },
   {
@@ -134,9 +134,9 @@
     "location": "Makassar",
     "is_available": true,
     "available_date": "2025-03-17",
-    "start_time": "08:00",
+    "start_time": "00:01",
     "finish_date": "2025-03-21",
-    "end_time": "08:00",
+    "end_time": "23:59",
     "is_with_driver": true
   }
 ]

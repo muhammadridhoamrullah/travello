@@ -10,14 +10,14 @@ import { MdOutlineCarRental } from "react-icons/md";
 import { MdAttractions } from "react-icons/md";
 import { HiMiniSquares2X2 } from "react-icons/hi2";
 import { useState } from "react";
-import HotelFormMenu from "../components/HotelFormMenu";
-import TiketPesawatFormMenu from "../components/TiketPesawatFormMenu";
-import TiketKeretaApiFormMenu from "../components/TiketKeretaApiFormMenu";
-import TiketBusTravelFormMenu from "../components/TiketBusTravelFormMenu";
-import AntarJemputBandaraFormMenu from "../components/AntarJemputBandaraFormMenu";
-import RentalMobilFormMenu from "../components/RentalMobilFormMenu";
-import AtraksiAktivitasFormMenu from "../components/AtraksiAktivitasFormMenu";
-import LainnyaFormMenu from "../components/LainnyaFormMenu";
+import HotelFormMenu from "../../components/HotelFormMenu";
+import TiketPesawatFormMenu from "../../components/TiketPesawatFormMenu";
+import TiketKeretaApiFormMenu from "../../components/TiketKeretaApiFormMenu";
+import TiketBusTravelFormMenu from "../../components/TiketBusTravelFormMenu";
+import AntarJemputBandaraFormMenu from "../../components/AntarJemputBandaraFormMenu";
+import RentalMobilFormMenu from "../../components/RentalMobilFormMenu";
+import AtraksiAktivitasFormMenu from "../../components/AtraksiAktivitasFormMenu";
+import LainnyaFormMenu from "../../components/LainnyaFormMenu";
 
 export default function Home() {
   const [activeMenu, setActiveMenu] = useState("rentalMobil");

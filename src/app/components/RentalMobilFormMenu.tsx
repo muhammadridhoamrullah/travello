@@ -8,8 +8,10 @@ import { GrMap, GrCalendar, GrClock } from "react-icons/gr";
 import { FaSearch } from "react-icons/fa";
 import { LuClock4 } from "react-icons/lu";
 import Swal from "sweetalert2";
+import { useRouter } from "next/navigation";
 
 export default function RentalMobilFormMenu() {
+  const navigate = useRouter();
   const [formData, setFormData] = useState({
     is_with_driver: false,
     location: "",
@@ -54,13 +56,22 @@ export default function RentalMobilFormMenu() {
     e.preventDefault();
 
     try {
-      const url = `http://localhost:3000/api/rental-mobil/search?is_with_driver=${formData.is_with_driver}&location=${formData.location}&available_date=${formData.available_date}&start_time=${formData.start_time}&finish_date=${formData.finish_date}&end_time=${formData.end_time}`;
+      const searchParams = new URLSearchParams({
+        is_with_driver: formData.is_with_driver.toString(),
+        location: formData.location,
+        available_date: formData.available_date,
+        start_time: formData.start_time,
+        finish_date: formData.finish_date,
+        end_time: formData.end_time,
+      });
+
+      console.log(searchParams, "ini searchParams");
+
+      const url = `http://localhost:3000/api/rental-mobil/search?${searchParams.toString()}`;
 
       console.log(url, "ini url");
 
       const response = await fetch(url);
-
-      
 
       const responseData = await response.json();
 
@@ -68,7 +79,7 @@ export default function RentalMobilFormMenu() {
         throw new Error(responseData.message);
       }
 
-      console.log(responseData, "ini response data");
+      navigate.push(`/rental-mobil/search?${searchParams.toString()}`);
     } catch (error) {
       if (error instanceof Error) {
         Swal.fire({
@@ -138,7 +149,9 @@ export default function RentalMobilFormMenu() {
               onChange={changeHandler}
               value={formData.location}
             >
-              <option disabled>Cari Kota atau Wilayah</option>
+              <option value={""} disabled>
+                Cari Kota atau Wilayah
+              </option>
               {daftarKota.map((el, i) => {
                 return (
                   <option

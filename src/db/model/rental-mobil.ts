@@ -16,7 +16,11 @@ type InputFormSearchRentalMobil = Pick<
 export async function SearchRentalMobil(inputUser: InputFormSearchRentalMobil) {
   const db = await GetDB();
 
-  console.log(inputUser, "ini inputUser di model rental-mobil");
+  const checkTanggal = inputUser.finish_date < inputUser.available_date;
+
+  if (checkTanggal) {
+    throw new Error("Tanggal selesai harus setelah tanggal mulai");
+  }
 
   const searchResult = await db
     .collection(COLLECTION_NAME)
@@ -29,7 +33,6 @@ export async function SearchRentalMobil(inputUser: InputFormSearchRentalMobil) {
       end_time: { $gte: inputUser.end_time },
     })
     .toArray();
-  console.log(searchResult, "ini searchResult di model rental-mobil");
 
   return searchResult;
 }

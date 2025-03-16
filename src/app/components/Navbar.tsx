@@ -16,6 +16,7 @@ import { LiaBinocularsSolid } from "react-icons/lia";
 import { GoGift } from "react-icons/go";
 import { TbShip } from "react-icons/tb";
 import { FaRegAddressCard } from "react-icons/fa";
+import { usePathname } from "next/navigation";
 const Cookies = require("js-cookie");
 
 export default function Navbar() {
@@ -23,10 +24,17 @@ export default function Navbar() {
   const [showProdukLainnyaDropdown, setShowProdukLainnyaDropdown] =
     useState(false);
 
+  const pathName = usePathname();
+
+  const isHomePage = pathName === "/";
   const cookiesAuth = Cookies.get("access_token");
 
   return (
-    <div className="fixed top-0 left-0 w-full  z-50 px-20 py-2 flex flex-col justify-center gap-2 ">
+    <div
+      className={`${
+        isHomePage ? "fixed top-0 left-0" : "relative"
+      } w-full  z-50 px-20 py-2 flex flex-col justify-center gap-2 `}
+    >
       <div className="flex justify-between">
         <div className="w-36 h-10 relative ">
           <Link href={"/"}>

@@ -30,7 +30,6 @@ export async function CreateUser(user: inputCreateUser) {
     .collection(COLLECTION_NAME)
     .insertOne(modifiedUser);
 
-  console.log(creatingUser, "ini creatingUser di model user");
 
   return creatingUser;
 }
