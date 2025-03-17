@@ -67,17 +67,17 @@ export default function RentalMobilFormMenu() {
 
       console.log(searchParams, "ini searchParams");
 
-      const url = `http://localhost:3000/api/rental-mobil/search?${searchParams.toString()}`;
+      // const url = `http://localhost:3000/api/rental-mobil/search?${searchParams.toString()}`;
 
-      console.log(url, "ini url");
+      // console.log(url, "ini url");
 
-      const response = await fetch(url);
+      // const response = await fetch(url);
 
-      const responseData = await response.json();
+      // const responseData = await response.json();
 
-      if (!response.ok) {
-        throw new Error(responseData.message);
-      }
+      // if (!response.ok) {
+      //   throw new Error(responseData.message);
+      // }
 
       navigate.push(`/rental-mobil/search?${searchParams.toString()}`);
     } catch (error) {

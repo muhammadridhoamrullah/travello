@@ -4,6 +4,7 @@ import { RentalMobilModel } from "@/type";
 import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import Swal from "sweetalert2";
+import Loading from "./loading";
 
 export default function PageRentalMobil() {
   const searchParams = useSearchParams();
@@ -20,14 +21,19 @@ export default function PageRentalMobil() {
       console.log(url, "ini url");
 
       const response = await fetch(url);
+      console.log(response, "ini response di page search");
 
       if (!response.ok) {
         throw new Error("Failed to fetch data from server");
       }
 
       const responseData = await response.json();
+      console.log(
+        responseData.searchResult,
+        "ini response data di page search"
+      );
 
-      setRentalMobil(responseData.data);
+      setRentalMobil(responseData.searchResult);
       setLoading(false);
     } catch (error) {
       if (error instanceof Error) {
@@ -47,7 +53,10 @@ export default function PageRentalMobil() {
   }
 
   useEffect(() => {
+    console.log("Use Effect");
+
     fetchRentalMobil();
+    console.log("Use Effect berhasil");
   }, [searchParams]);
 
   const formatRupiah = (price: number) => {
@@ -56,6 +65,12 @@ export default function PageRentalMobil() {
       currency: "IDR",
       minimumFractionDigits: 0,
     }).format(price);
+  };
+
+  const formatDate = (date: string) => {
+    return new Intl.DateTimeFormat("id-ID", {
+      dateStyle: "full",
+    }).format(new Date(date));
   };
 
   const location = searchParams.get("location");
@@ -70,15 +85,19 @@ export default function PageRentalMobil() {
     <div
       className={`${poppins.className} min-h-screen w-full flex flex-col  justify-start items-center gap-2`}
     >
-      <div className="bg-red-600 w-full h-64 relative">
+      {/* Awal Image Hero */}
+      <div className=" w-full h-64 relative">
         <img
           src={"/background_rental-mobil.jpg"}
           alt="Rental Mobil"
           className="absolute w-full h-full object-cover"
         />
       </div>
-      <div className="bg-green-800 w-[950px] h-fit flex flex-col gap-4 ">
-        <div className="bg-[#0194F3] p-3 flex flex-col gap-2">
+      {/* Akhir Image Hero */}
+
+      <div className=" w-[950px] h-fit flex flex-col gap-4 ">
+        {/* Awal Filter Summary */}
+        <div className="bg-[#0194F3] p-3 flex flex-col gap-2 rounded-lg">
           <div className="flex gap-2 text-sm">
             <div>Rental</div>
             <div>/</div>
@@ -86,16 +105,41 @@ export default function PageRentalMobil() {
               {is_with_driver === "true" ? "Dengan Sopir" : "Tanpa Sopir"}
             </div>
           </div>
-          <div className="bg-amber-700 flex flex-col">
-            <div>
+          <div className=" flex flex-col">
+            <div className="text-xl font-bold">
               {is_with_driver === "true"
                 ? "Car Rental With Driver"
                 : "Car Rental Without Driver"}
             </div>
-            <div>Daerah Jadwal Dll</div>
+            <div className="flex justify-start items-center gap-1 text-sm text-gray-200">
+              <div>{location}</div>
+              <div>•</div>
+              <div>
+                {available_date ? `${formatDate(available_date)},` : "N/A"}
+              </div>
+              <div>{start_time} WIB</div>
+              <div>-</div>
+              <div>{finish_date ? `${formatDate(finish_date)},` : "N/A"}</div>
+              <div>{end_time} WIB</div>
+            </div>
           </div>
         </div>
-        <div className="bg-red-900">Card Rental Mobil</div>
+        {/* Akhir Filter Summary */}
+
+        {/* Awal Card Rental Mobil */}
+        {loading ? (
+          <Loading />
+        ) : (
+          rentalMobil?.map((el: RentalMobilModel, i: number) => {
+            return (
+              <div key={i} className="bg-red-900 w-full h-36">
+                <img src={el.image_car} alt="" />
+                <div>{el.car_model}</div>
+              </div>
+            );
+          })
+        )}
+        {/* Akhir Card Rental Mobil */}
       </div>
     </div>
   );

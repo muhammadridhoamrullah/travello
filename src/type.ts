@@ -26,4 +26,5 @@ export interface RentalMobilModel {
   finish_date: string;
   end_time: string;
   is_with_driver: boolean;
+  image_car: string;
 }
