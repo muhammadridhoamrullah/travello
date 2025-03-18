@@ -1,5 +1,6 @@
 import { RentalMobilModel } from "@/type";
 import { GetDB } from "../config";
+import { ObjectId } from "mongodb";
 
 const COLLECTION_NAME = "rental-mobil";
 
@@ -35,4 +36,14 @@ export async function SearchRentalMobil(inputUser: InputFormSearchRentalMobil) {
     .toArray();
 
   return searchResult;
+}
+
+export async function DetailRentalMobil(_id: string) {
+  const db = await GetDB();
+
+  const detailResult = await db.collection(COLLECTION_NAME).findOne({
+    _id: new ObjectId(_id),
+  });
+
+  return detailResult;
 }

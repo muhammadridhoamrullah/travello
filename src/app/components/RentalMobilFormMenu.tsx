@@ -14,11 +14,13 @@ export default function RentalMobilFormMenu() {
   const navigate = useRouter();
   const [formData, setFormData] = useState({
     is_with_driver: false,
-    location: "",
-    available_date: "",
-    start_time: "",
-    finish_date: "",
-    end_time: "",
+    location: "Jakarta",
+    available_date: new Date().toISOString().split("T")[0],
+    start_time: "09:00",
+    finish_date: new Date(new Date().setDate(new Date().getDate() + 1))
+      .toISOString()
+      .split("T")[0],
+    end_time: "09:00",
   });
 
   const handleTipeSopir = (value: boolean) => {
@@ -66,6 +68,26 @@ export default function RentalMobilFormMenu() {
       });
 
       console.log(searchParams, "ini searchParams");
+
+      if (formData.location === "") {
+        throw new Error("Lokasi Rental harus diisi");
+      }
+
+      if (formData.available_date === "") {
+        throw new Error("Tanggal Mulai Rental harus diisi");
+      }
+
+      if (formData.start_time === "") {
+        throw new Error("Waktu Mulai harus diisi");
+      }
+
+      if (formData.finish_date === "") {
+        throw new Error("Tanggal Selesai harus diisi");
+      }
+
+      if (formData.end_time === "") {
+        throw new Error("Waktu Selesai harus diisi");
+      }
 
       // const url = `http://localhost:3000/api/rental-mobil/search?${searchParams.toString()}`;
 

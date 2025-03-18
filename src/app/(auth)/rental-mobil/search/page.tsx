@@ -1,37 +1,32 @@
 "use client";
 import { poppins } from "@/font";
 import { RentalMobilModel } from "@/type";
-import { useSearchParams } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import Swal from "sweetalert2";
 import Loading from "./loading";
+import CardRentalMobil from "@/app/components/CardRentalMobil";
 
 export default function PageRentalMobil() {
   const searchParams = useSearchParams();
+  const navigate = useRouter();
 
   const [rentalMobil, setRentalMobil] = useState<RentalMobilModel[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
-  console.log(rentalMobil, "ini rental mobil");
 
   async function fetchRentalMobil() {
     try {
       setLoading(true);
 
       const url = `http://localhost:3000/api/rental-mobil/search?${searchParams.toString()}`;
-      console.log(url, "ini url");
 
       const response = await fetch(url);
-      console.log(response, "ini response di page search");
 
       if (!response.ok) {
         throw new Error("Failed to fetch data from server");
       }
 
       const responseData = await response.json();
-      console.log(
-        responseData.searchResult,
-        "ini response data di page search"
-      );
 
       setRentalMobil(responseData.searchResult);
       setLoading(false);
@@ -59,14 +54,6 @@ export default function PageRentalMobil() {
     console.log("Use Effect berhasil");
   }, [searchParams]);
 
-  const formatRupiah = (price: number) => {
-    return new Intl.NumberFormat("id-ID", {
-      style: "currency",
-      currency: "IDR",
-      minimumFractionDigits: 0,
-    }).format(price);
-  };
-
   const formatDate = (date: string) => {
     return new Intl.DateTimeFormat("id-ID", {
       dateStyle: "full",
@@ -79,11 +66,14 @@ export default function PageRentalMobil() {
   const finish_date = searchParams.get("finish_date");
   const end_time = searchParams.get("end_time");
   const is_with_driver = searchParams.get("is_with_driver");
-  console.log(is_with_driver, "ini is with driver");
+
+  function handleBack() {
+    navigate.back();
+  }
 
   return (
     <div
-      className={`${poppins.className} min-h-screen w-full flex flex-col  justify-start items-center gap-2`}
+      className={`${poppins.className} min-h-screen w-full flex flex-col  justify-start items-center gap-2 pb-5`}
     >
       {/* Awal Image Hero */}
       <div className=" w-full h-64 relative">
@@ -128,16 +118,30 @@ export default function PageRentalMobil() {
 
         {/* Awal Card Rental Mobil */}
         {loading ? (
-          <Loading />
-        ) : (
+          <div className="space-y-4 ">
+            {Array.from({ length: 3 }).map((_, i) => (
+              <Loading key={i} />
+            ))}
+          </div>
+        ) : rentalMobil && rentalMobil.length > 0 ? (
           rentalMobil?.map((el: RentalMobilModel, i: number) => {
-            return (
-              <div key={i} className="bg-red-900 w-full h-36">
-                <img src={el.image_car} alt="" />
-                <div>{el.car_model}</div>
-              </div>
-            );
+            return <CardRentalMobil key={i} data={el} i={i} />;
           })
+        ) : (
+          <div className="flex flex-col gap-2 justify-center items-center ">
+            <div>Tidak ada rental mobil tersedia</div>
+            <div className="text-sm text-gray-500">
+              Silakan coba lagi dengan kriteria pencarian yang berbeda
+            </div>
+            <button>
+              <div
+                className="bg-[#0194F3] text-white p-2 rounded-lg cursor-pointer"
+                onClick={handleBack}
+              >
+                Kembali
+              </div>
+            </button>
+          </div>
         )}
         {/* Akhir Card Rental Mobil */}
       </div>

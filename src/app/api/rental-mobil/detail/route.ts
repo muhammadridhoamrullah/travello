@@ -1,21 +1,29 @@
-import { SearchRentalMobil } from "@/db/model/rental-mobil";
+import { DetailRentalMobil } from "@/db/model/rental-mobil";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function GET(request: NextRequest) {
   try {
-    // Ambil params dari query string
     const searchedParams = request.nextUrl.searchParams;
 
+    const _id = searchedParams.get("_id");
+    console.log(_id, "ini _id di API rental-mobil/detail");
+
     const is_with_driver = searchedParams.get("is_with_driver") === "true";
+    console.log(
+      is_with_driver,
+      "ini is with driver di API rental-mobil/detail"
+    );
+
     const location = searchedParams.get("location");
+    console.log(location, "ini location di API rental-mobil/detail");
+
     const available_date = searchedParams.get("available_date");
     const start_time = searchedParams.get("start_time");
     const finish_date = searchedParams.get("finish_date");
     const end_time = searchedParams.get("end_time");
 
-    // Validasi input
-
     if (
+      !_id ||
       is_with_driver === undefined ||
       !location ||
       !available_date ||
@@ -26,18 +34,12 @@ export async function GET(request: NextRequest) {
       throw new Error("All fields must be filled");
     }
 
-    const searchResult = await SearchRentalMobil({
-      is_with_driver,
-      location,
-      available_date,
-      start_time,
-      finish_date,
-      end_time,
-    });
+    const detailResult = await DetailRentalMobil(_id);
+    console.log(detailResult, "ini detailResult di API rental-mobil/detail");
 
     return NextResponse.json(
       {
-        searchResult,
+        detailResult,
       },
       {
         status: 200,
@@ -50,7 +52,7 @@ export async function GET(request: NextRequest) {
           message: error.message,
         },
         {
-          status: 400,
+          status: 500,
         }
       );
     } else {
