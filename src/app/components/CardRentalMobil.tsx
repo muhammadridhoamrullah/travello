@@ -6,7 +6,7 @@ import { BsLuggage } from "react-icons/bs";
 import { MdLuggage } from "react-icons/md";
 import { PiSeatFill } from "react-icons/pi";
 import { PiSeat } from "react-icons/pi";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 
 interface Props {
   data: RentalMobilModel;
@@ -15,6 +15,9 @@ interface Props {
 
 export default function CardRentalMobil({ data, i }: Props) {
   const navigate = useRouter();
+  const searchedParams = useSearchParams();
+  console.log(searchedParams, "ini searchedParams di card rental mobil");
+
   const formatRupiah = (price: number) => {
     return new Intl.NumberFormat("id-ID", {
       style: "currency",
@@ -23,16 +26,25 @@ export default function CardRentalMobil({ data, i }: Props) {
     }).format(price);
   };
 
+  const _id = data._id;
+  const location = searchedParams.get("location");
+  const available_date = searchedParams.get("available_date");
+  const start_time = searchedParams.get("start_time");
+  const finish_date = searchedParams.get("finish_date");
+  const end_time = searchedParams.get("end_time");
+  const is_with_driver = searchedParams.get("is_with_driver");
+
   const searchParams = new URLSearchParams({
-    _id: data._id.toString(),
-    is_with_driver: data.is_with_driver.toString(),
-    location: data.location,
-    available_date: data.available_date,
-    start_time: data.start_time,
-    finish_date: data.finish_date,
-    end_time: data.end_time,
+    _id: String(_id),
+    location: location ?? "",
+    available_date: available_date ?? "",
+    start_time: start_time ?? "",
+    finish_date: finish_date ?? "",
+    end_time: end_time ?? "",
+    is_with_driver: is_with_driver ?? "",
   });
-  console.log(searchParams, "ini searchParams card r");
+
+  console.log(searchParams, "ini searchParams di card rental mobil");
 
   return (
     <div

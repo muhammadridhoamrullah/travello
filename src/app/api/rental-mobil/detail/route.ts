@@ -6,17 +6,8 @@ export async function GET(request: NextRequest) {
     const searchedParams = request.nextUrl.searchParams;
 
     const _id = searchedParams.get("_id");
-    console.log(_id, "ini _id di API rental-mobil/detail");
-
     const is_with_driver = searchedParams.get("is_with_driver") === "true";
-    console.log(
-      is_with_driver,
-      "ini is with driver di API rental-mobil/detail"
-    );
-
     const location = searchedParams.get("location");
-    console.log(location, "ini location di API rental-mobil/detail");
-
     const available_date = searchedParams.get("available_date");
     const start_time = searchedParams.get("start_time");
     const finish_date = searchedParams.get("finish_date");
